@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS Artists (
 CREATE TABLE IF NOT EXISTS Albums (
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(50) NOT NULL,
-	year_release INTEGER CHECK(year_release>1900 AND year_release<2100) NOT NULL 
+	year_release INTEGER CHECK(year_release>1900 AND year_release<2100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Tracks (
