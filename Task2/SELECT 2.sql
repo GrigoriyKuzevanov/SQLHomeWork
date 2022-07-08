@@ -11,10 +11,14 @@ SELECT a.id, a."name", round(avg(duration_sec), 2)  FROM albums a
 	JOIN tracks t ON a.id = t.album_id
 	GROUP BY a.id;
 	
-SELECT a."name" FROM artists a 
-	JOIN artistalbum a2 ON a.id = a2.artist_id
-	JOIN albums a3 ON a2.album_id = a3.id
-	WHERE a3.year_release != 2020;
+SELECT DISTINCT a."name" FROM artists a
+	WHERE a."name" NOT IN (
+		SELECT DISTINCT a."name" FROM artists a
+			LEFT JOIN artistalbum a2 ON a.id = a2.artist_id
+			LEFT JOIN albums a3 ON a3.id = a2.album_id
+			WHERE a3.year_release = 2020
+	)
+	ORDER BY a."name"
 	
 SELECT c."name"  FROM compilations c
 	JOIN compilationtrack c2 ON c.id = c2.compilation_id
